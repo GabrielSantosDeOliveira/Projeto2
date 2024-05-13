@@ -1,25 +1,33 @@
-﻿using Projeto2;
+﻿using Projeto;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
 
-namespace Projeto
+namespace Projeto2
 {
-    public class CCorrente
+    public class CPoupanca
     {
         public string numero;
         public double saldo;
-        public double limite;
         public bool status;
-        public bool especial;
-
+        public List<Transacao>
+            Transacoes;
+        public CPoupanca()
+        {
+            this.saldo = 0;
+            this.status = true;
+            Transacoes = new List<Transacao>();
+        }
+        public CPoupanca(string numero)
+        {
+            this.numero = numero;
+        }
         public bool Saque(double valor)
         {
-            if (saldo - valor > -limite)
+            if (saldo - valor > 0)
             {
                 saldo -= valor;
                 Transacoes.Add(new Transacao(valor, 'S'));
@@ -27,8 +35,7 @@ namespace Projeto
             }
             return false;
         }
-        public List<Transacao>
-            Transacoes;
+
         public bool Depositar(double valor)
         {
             if (valor > 0)
@@ -60,17 +67,5 @@ namespace Projeto
             }
             return false;
         }
-        public CCorrente(string numero, double limite) : this()
-        {
-            this.numero = numero;
-            this.limite = limite;
-        }
-        public CCorrente()
-        {
-            this.saldo = 0;
-            this.status = true;
-            Transacoes = new List<Transacao>();
-        }
-
     }
 }
