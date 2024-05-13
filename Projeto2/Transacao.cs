@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projeto2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,12 @@ namespace Projeto
         public double valor;
         public char tipo;
         public Transacao duplicata;
-        public Transacao(double valor, char tipo)
+        public Conta conta;
+        public Transacao(double valor, char tipo, Conta conta)
         {
             this.valor = valor;
             this.tipo = tipo;
+            this.conta = conta;
         }
     }
 }
