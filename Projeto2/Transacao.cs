@@ -7,12 +7,30 @@ using System.Threading.Tasks;
 
 namespace Projeto
 {
+
     public class Transacao
     {
         public double valor;
         public char tipo;
         public Transacao duplicata;
         public Conta conta;
+        public double Valor
+        {
+            get => this.valor;
+        }
+        public char Tipo
+        {
+            get => this.tipo;
+        }
+        public Transacao Duplicata
+        {
+            get => this.duplicata;
+            set => this.duplicata = value;
+        }
+        public Conta Conta
+        {
+            get=> this.conta;
+        }
         public Transacao(double valor, char tipo, Conta conta)
         {
             this.valor = valor;

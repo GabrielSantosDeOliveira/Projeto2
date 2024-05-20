@@ -18,20 +18,51 @@ namespace Projeto2
         {
             this.saldo = 0;
             this.status = true;
-            Transacoes = new List<Transacao>();
+            transacoes = new List<Transacao>();
         }
-        public string numero;
-        public double saldo;
-        public double limite;
-        public bool status;
-        public List<Transacao>
-            Transacoes;
+        protected string numero;
+        protected double saldo;
+        protected double limite;
+        protected bool status;
+        protected List<Transacao>
+            transacoes;
+        public string Numero
+        {
+            get => this.numero;
+            set => this.numero = value;
+        }
+        public double Saldo
+        {
+            get => this.saldo;
+        }
+        public double Limite
+        {
+            get => this.limite;
+            set
+            {
+                if(value >=0)
+                {
+                    this.limite = value;
+                }
+            }
+        }
+        public bool Status
+        {
+            get => this.status;
+            set => this.status = value;
+        }
+
+        public List<Transacao> Transacoes
+        {
+            get => this.transacoes;
+        }
+
         public bool Saque(double valor)
         {
             if (saldo - valor > -limite)
             {
                 saldo -= valor;
-                Transacoes.Add(new Transacao(valor, 'S', this));
+                transacoes.Add(new Transacao(valor, 'S', this));
                 return true;
             }
             return false;
@@ -41,28 +72,18 @@ namespace Projeto2
             if (valor > 0)
             {
                 saldo += valor;
-                Transacoes.Add(new Transacao(valor, 'D', this));
+                transacoes.Add(new Transacao(valor, 'D', this));
                 return true;
             }
             return false;
         }
 
-        public bool Transferir(CCorrente destino, double valor)
+        public bool Transferir(Conta destino, double valor)
         {
             if (destino.status && Saque(valor) && destino.Depositar(valor))
             {
-                Transacoes[Transacoes.Count - 1].duplicata = destino.Transacoes[Transacoes.Count - 1];
-                destino.Transacoes[destino.Transacoes.Count - 1].duplicata = Transacoes[Transacoes.Count - 1];
-                return true;
-            }
-            return false;
-        }
-        public bool Transferir(CPoupanca destino, double valor)
-        {
-            if (destino.status && Saque(valor) && destino.Depositar(valor))
-            {
-                Transacoes[Transacoes.Count - 1].duplicata = destino.Transacoes[Transacoes.Count - 1];
-                destino.Transacoes[destino.Transacoes.Count - 1].duplicata = Transacoes[Transacoes.Count - 1];
+                transacoes[transacoes.Count - 1].duplicata = destino.transacoes[transacoes.Count - 1];
+                destino.transacoes[destino.transacoes.Count - 1].duplicata = transacoes[transacoes.Count - 1];
                 return true;
             }
             return false;

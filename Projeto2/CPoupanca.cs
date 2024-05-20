@@ -10,16 +10,13 @@ namespace Projeto2
 {
     public class CPoupanca:Conta
     {
-        public CPoupanca()
+        public CPoupanca() : base()
         {
-            this.saldo = 0;
-            this.status = true;
-            Transacoes = new List<Transacao>();
             this.limite = 0;
         }
-        public CPoupanca(string numero) : this()
+        public CPoupanca(string numero) : base(numero)
         {
-            this.numero = numero;
+            this.limite = 0;
         }
  
     }

@@ -11,18 +11,20 @@ namespace Projeto
 {
     public class CCorrente:Conta
     {
-        public bool especial;
-
-        public CCorrente(string numero, double limite) : this()
+        public bool Especial
         {
-            this.numero = numero;
+            get => this.especial;
+            set => this.especial = value;
+        }
+        private bool especial;
+
+        public CCorrente(string numero, double limite) : base(numero)
+        {
             this.limite = limite;
         }
-        public CCorrente()
+        public CCorrente() : base() 
         {
-            this.saldo = 0;
-            this.status = true;
-            Transacoes = new List<Transacao>();
+
         }
     }
 }
